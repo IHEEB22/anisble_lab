@@ -1,0 +1,17 @@
+---
+- name: deploy app in new aks namespace
+  hosts: localhost
+  tasks:
+    - name: Create a k8s namespace
+      k8s:
+        name: nginx-ns
+        kind: Namespace
+        state: present
+
+    - name: deploy simple nginx app 
+      k8s:
+        name: testing
+        src: ./simple-nginx.yml
+        namespace: nginx-ns
+        state: present
+
