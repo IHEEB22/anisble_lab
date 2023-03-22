@@ -21,12 +21,35 @@
 ### show resources and components from current state
 
     terraform state list
-
-### show current state of a specific resource/data
-
-    terraform state show resource.name    
+      
+### save kubeconfig file localy  
     
-### download required packages for the python script 
+    terraform output aks_kube_config > ~/.kube/aks-config
+
+### remove first and last line from the aks.yml file (remove EOF>> and  EOT) 
     
-    pip install -r requirements.txt 
+    sed -i '1d;$d' ~/.kube/aks-config
+
+### make the kubeconfig file available for the k8s module 
+
+    export K8S_AUTH_KUBECONFIG=~/.kube/aks-config
+
+### install all requirements for the k8s ansible module 
+
+    pip install -r requirements.txt
+
+### run the ansible playbook 
+
+    ansible-playbook aks-playbook.yml
+
+### make the kubeconfig file available for the kubectl cli 
+
+    export KUBECONFIG=~/.kube/aks-config
+
+### list pods created by ansible playbook using kubectl 
+
+    kubectl get pods -n nginx-ns
+
+
+    
 

@@ -16,3 +16,5 @@
 .terraformrc
 terraform.rc
 
+# Ignore the azurek8s file  
+./azurek8s
