@@ -1,5 +1,5 @@
 ### initialize
-
+ 
     terraform init
 
 ### preview terraform actions
